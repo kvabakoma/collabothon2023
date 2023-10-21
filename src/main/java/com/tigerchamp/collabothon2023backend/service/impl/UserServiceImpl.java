@@ -1,11 +1,13 @@
 package com.tigerchamp.collabothon2023backend.service.impl;
 
+import com.tigerchamp.collabothon2023backend.model.dto.UserRegisterDto;
 import com.tigerchamp.collabothon2023backend.model.entity.Authority;
 import com.tigerchamp.collabothon2023backend.model.entity.Role;
 import com.tigerchamp.collabothon2023backend.model.entity.User;
 import com.tigerchamp.collabothon2023backend.repository.UserRepository;
 import com.tigerchamp.collabothon2023backend.service.RoleService;
 import com.tigerchamp.collabothon2023backend.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,12 +25,14 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleService = roleService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -38,25 +42,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(User register) {
-        register.setEnabled(true);
-        register.setCredentialsNonExpired(true);
-        register.setAccountNonLocked(true);
-        register.setAccountNonExpired(true);
+    public User register(UserRegisterDto registerDto) {
+        User userToRegister = modelMapper.map(registerDto,User.class);
+        userToRegister.setEnabled(true);
+        userToRegister.setCredentialsNonExpired(true);
+        userToRegister.setAccountNonLocked(true);
+        userToRegister.setAccountNonExpired(true);
         Set<Role> userRole = new HashSet<>();
         userRole.add(this.roleService.findByAuthority(Authority.ROLE_USER));
-        register.setAuthorities(userRole);
-        if(register.getPassword() != null){
-            register.setPassword(passwordEncoder.encode(register.getPassword()));
+        userToRegister.setAuthorities(userRole);
+        if(userToRegister.getPassword() != null){
+            userToRegister.setPassword(passwordEncoder.encode(userToRegister.getPassword()));
         }
-        this.userRepository.save(register);
+        this.userRepository.save(userToRegister);
 
-        return register;
+        return userToRegister;
     }
 
     @Override
     public User findByUsername(String username) {
         return this.userRepository.findByUsername(username).orElse(null);
+    }
+
+    @Override
+    public User findById(String id) {
+        return this.userRepository.findById(id).orElse(null);
     }
 
     @Override

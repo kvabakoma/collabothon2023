@@ -1,5 +1,6 @@
 package com.tigerchamp.collabothon2023backend.service;
 
+import com.tigerchamp.collabothon2023backend.model.dto.UserRegisterDto;
 import com.tigerchamp.collabothon2023backend.model.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -9,9 +10,11 @@ import java.util.Set;
 
 @Service
 public interface UserService extends UserDetailsService {
-    User register(User userServiceModel);
+    User register(UserRegisterDto registerDto);
 
     User findByUsername(String username);
+
+    User findById(String id);
 
     Set<User> findAllEnabledFalseUsers();
 

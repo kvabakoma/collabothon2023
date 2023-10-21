@@ -5,6 +5,7 @@ import com.tigerchamp.collabothon2023backend.configuration.JwtUtils;
 import com.tigerchamp.collabothon2023backend.model.binding.ErrorMessage;
 import com.tigerchamp.collabothon2023backend.model.dto.AuthenticatedUserDto;
 import com.tigerchamp.collabothon2023backend.model.dto.UserLoginDto;
+import com.tigerchamp.collabothon2023backend.model.dto.UserRegisterDto;
 import com.tigerchamp.collabothon2023backend.model.entity.User;
 import com.tigerchamp.collabothon2023backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -73,11 +73,8 @@ public class UserController {
 
 
     @GetMapping("/register")
-    public String register(Model model){
-//        if (!model.containsAttribute("userRegisterBindingModel")){
-//            model.addAttribute("userRegisterBindingModel",new UserRegisterBindingModel());
-//        }
-
-        return "register";
+    public String register(@RequestBody UserRegisterDto registerDto){
+        userService.register(registerDto);
+        return String.format("User %s registered!", registerDto.getUsername());
     }
 }
