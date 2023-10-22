@@ -15,10 +15,10 @@ public class BankApplicant {
     private Gender gender;
     private String originCountry;
     private String currentCountry;
-    private ObjectId documentID;
-    private ObjectId documentRent;
-    private ObjectId documentEmployment;
-    private List<ObjectId> additionalDocuments;
+    private String documentID;
+    private String documentRent;
+    private String documentEmployment;
+    private List<String> additionalDocuments;
     private List<Bank> banksApplied;
 
     public BankApplicant() {
@@ -81,35 +81,35 @@ public class BankApplicant {
         this.currentCountry = currentCountry;
     }
 
-    public ObjectId getDocumentID() {
+    public String getDocumentID() {
         return documentID;
     }
 
-    public void setDocumentID(ObjectId documentID) {
+    public void setDocumentID(String documentID) {
         this.documentID = documentID;
     }
 
-    public ObjectId getDocumentRent() {
+    public String getDocumentRent() {
         return documentRent;
     }
 
-    public void setDocumentRent(ObjectId documentRent) {
+    public void setDocumentRent(String documentRent) {
         this.documentRent = documentRent;
     }
 
-    public ObjectId getDocumentEmployment() {
+    public String getDocumentEmployment() {
         return documentEmployment;
     }
 
-    public void setDocumentEmployment(ObjectId documentEmployment) {
+    public void setDocumentEmployment(String documentEmployment) {
         this.documentEmployment = documentEmployment;
     }
 
-    public List<ObjectId> getAdditionalDocuments() {
+    public List<String> getAdditionalDocuments() {
         return additionalDocuments;
     }
 
-    public void setAdditionalDocuments(List<ObjectId> additionalDocuments) {
+    public void setAdditionalDocuments(List<String> additionalDocuments) {
         this.additionalDocuments = additionalDocuments;
     }
 
@@ -119,5 +119,11 @@ public class BankApplicant {
 
     public void setBanksApplied(List<Bank> banksApplied) {
         this.banksApplied = banksApplied;
+    }
+
+    public void addBank(Bank bank) {
+        if (banksApplied != null) {
+            banksApplied.add(bank);
+        }
     }
 }

@@ -72,7 +72,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/register")
+    @PostMapping("/register")
     public String register(@RequestBody UserRegisterDto registerDto){
         userService.register(registerDto);
         return String.format("User %s registered!", registerDto.getUsername());

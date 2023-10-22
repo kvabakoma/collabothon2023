@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public interface BankRepository extends MongoRepository<Bank, String> {
-
     List<Bank> findAll();
     Bank findByName(String name);
 }

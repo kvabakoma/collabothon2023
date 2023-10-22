@@ -12,25 +12,25 @@ import java.util.List;
 public class BankApplicantDto {
     @JsonProperty("user_id")
     private String userId;
-    @JsonProperty("user_id")
+    @JsonProperty("name")
     private String name;
-    @JsonProperty("user_id")
-    private String family;
-    @JsonProperty("user_id")
+    @JsonProperty("family_name")
+    private String familyName;
+    @JsonProperty("gender")
     private Gender gender;
-    @JsonProperty("user_id")
+    @JsonProperty("origin_country")
     private String originCountry;
-    @JsonProperty("user_id")
+    @JsonProperty("current_country")
     private String currentCountry;
-    @JsonProperty("user_id")
-    private ObjectId documentID;
-    @JsonProperty("user_id")
-    private ObjectId documentRent;
-    @JsonProperty("user_id")
-    private ObjectId documentEmployment;
-    @JsonProperty("user_id")
-    private List<ObjectId> additionalDocuments;
-    @JsonProperty("user_id")
+    @JsonProperty("document_iD")
+    private String documentID;
+    @JsonProperty("document_rent")
+    private String documentRent;
+    @JsonProperty("document_employment")
+    private String documentEmployment;
+    @JsonProperty("additional_documents")
+    private List<String> additionalDocuments;
+    @JsonProperty("banks_applied")
     private List<Bank> banksApplied;
 
     public BankApplicantDto() {
@@ -52,12 +52,12 @@ public class BankApplicantDto {
         this.name = name;
     }
 
-    public String getFamily() {
-        return family;
+    public String getFamilyName() {
+        return familyName;
     }
 
-    public void setFamily(String family) {
-        this.family = family;
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
     }
 
     public Gender getGender() {
@@ -84,35 +84,35 @@ public class BankApplicantDto {
         this.currentCountry = currentCountry;
     }
 
-    public ObjectId getDocumentID() {
+    public String getDocumentID() {
         return documentID;
     }
 
-    public void setDocumentID(ObjectId documentID) {
+    public void setDocumentID(String documentID) {
         this.documentID = documentID;
     }
 
-    public ObjectId getDocumentRent() {
+    public String getDocumentRent() {
         return documentRent;
     }
 
-    public void setDocumentRent(ObjectId documentRent) {
+    public void setDocumentRent(String documentRent) {
         this.documentRent = documentRent;
     }
 
-    public ObjectId getDocumentEmployment() {
+    public String getDocumentEmployment() {
         return documentEmployment;
     }
 
-    public void setDocumentEmployment(ObjectId documentEmployment) {
+    public void setDocumentEmployment(String documentEmployment) {
         this.documentEmployment = documentEmployment;
     }
 
-    public List<ObjectId> getAdditionalDocuments() {
+    public List<String> getAdditionalDocuments() {
         return additionalDocuments;
     }
 
-    public void setAdditionalDocuments(List<ObjectId> additionalDocuments) {
+    public void setAdditionalDocuments(List<String> additionalDocuments) {
         this.additionalDocuments = additionalDocuments;
     }
 
